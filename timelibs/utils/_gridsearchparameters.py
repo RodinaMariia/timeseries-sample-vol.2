@@ -37,13 +37,10 @@ class ParameterSktimeLGBMRegressor(ParameterBridge):
         """This method overrides :meth:`ParameterBridge.get_param_grid`."""
         return {'estimator__boosting_type': ['gbdt', 'dart', 'goss', 'rf'],
                 'estimator__num_leaves': range(5, 35, 5),
-                'estimator__max_depth': [-1, 5, 10],
-                # 'estimator__learning_rate': [0.1, 0.01, 0.001],
-                # 'estimator__n_estimators': [100, 1000, 10000],
-                # 'estimator__reg_alpha': [0, 0.3, 0.6, 0.9],
-                # 'estimator__reg_lambda': [0, 0.3, 0.6, 0.9],
-                # 'estimator__min_child_weight': [math.exp(-1), math.exp(-3), math.exp(-5)],
-                # #'estimator__min_child_samples': range(10, 40, 10)
+                'estimator__max_depth': [-1, 5, 10],        
+                #
+                # Block with some additional parameters to search.
+                #
                 }
 
 
@@ -56,14 +53,9 @@ class ParameterSktimeGradientBoostingRegressor(ParameterBridge):
         return {
                 'estimator__n_estimators': [10, 50, 100, 300],
                 'estimator__max_depth': [2, 5, 10],
-                # 'estimator__learning_rate': [0.001, 0.01, 0.1],
-                # 'estimator__subsample': [0.1, 0.5, 1, 2],
-                # 'estimator__min_samples_split': [0.0001, 0.01, 0.1, 0.2, 1],
-                # 'estimator__min_samples_leaf': [0.0001, 0.01, 0.1, 0.5, 1],
-                # 'estimator__min_impurity_decrease': [0.0001, 0.01, 0.1, 0.9, 0],
-                # 'estimator__alpha': [0.2, 0.5, 0.9],
-                # 'estimator__criterion': ['friedman_mse', 'mse'],
-                # 'estimator__loss': ['ls', 'lad', 'huber', 'quantile']
+                #
+                # Block with some additional parameters to search.
+                #
                }
 
 
@@ -87,10 +79,9 @@ class ParameterSktimeElasticNet(ParameterBridge):
         """This method overrides :meth:`ParameterBridge.get_param_grid`."""
         return {'estimator__alpha': [0.1, 0.5, 1.0, 1.5, 5],
                 'estimator__l1_ratio': [0, 0.2, 0.5, 0.8, 1],
-                # 'estimator__max_iter': [10, 50, 100],
-                # 'estimator__tol': [exp(-2), exp(-4), exp(-6)],
-                # 'estimator__random_state': [42],
-                # 'estimator__selection': ['cyclic', 'random']
+                #
+                # Block with some additional parameters to search.
+                #
                 }
 
 
@@ -102,11 +93,9 @@ class ParameterSktimeARDRegression(ParameterBridge):
         """This method overrides :meth:`ParameterBridge.get_param_grid`."""
         return {'estimator__n_iter': [10, 100, 300, 500],
                 'estimator__tol': [exp(-3), exp(-2)],
-                # 'alpha_1': [exp(-7), exp(-6), exp(-5), exp(-4)],
-                # 'alpha_2': [exp(-7), exp(-6), exp(-5), exp(-4)],
-                # 'lambda_1': [exp(-7), exp(-6), exp(-5), exp(-4)],
-                # 'lambda_2': [exp(-7), exp(-6), exp(-5), exp(-4)],
-                # 'fit_intercept': [False]
+                #
+                # Block with some additional parameters to search.
+                #
                 }
 
 
@@ -124,46 +113,9 @@ class ParameterKatsLGBMRegressor(ParameterBridge):
              'value_type': 'str',
              'values': ['gbdt', 'dart', 'goss', 'rf']
              },
-            # {'name': 'num_leaves',
-            #  'type': 'choice',
-            #  'value_type': 'int',
-            #  'values': [5, 15, 30]
-            #  },
-            # {'name': 'max_depth',
-            #  'type': 'choice',
-            #  'value_type': 'int',
-            #  'values': [-1, 5, 10]
-            #  },
-            # {'name': 'learning_rate',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [0.1, 0.01, 0.001]
-            #  },
-            # {'name': 'n_estimators',
-            #  'type': 'choice',
-            #  'value_type': 'int',
-            #  'values': [100, 1000, 10000]
-            #  },
-            # {'name': 'reg_alpha',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [0, 0.3, 0.6, 0.9]
-            #  },
-            # {'name': 'reg_lambda',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [0, 0.3, 0.6, 0.9]
-            #  },
-            # {'name': 'min_child_weight',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [math.exp(-1), math.exp(-3), math.exp(-5)]
-            #  },
-            # {'name': 'min_child_samples',
-            #  'type': 'choice',
-            #  'value_type': 'int',
-            #  'values': [5, 15, 35]
-            #  },
+             #
+             # Block with some additional parameters to search.
+             #
         ]
 
 
@@ -182,38 +134,9 @@ class ParameterKatsGradientBoostingRegressor(ParameterBridge):
                  'type': 'choice',
                  'value_type': 'int',
                  'values': [2, 5, 10]},
-                # {'name': 'learning_rate',
-                #  'type': 'choice',
-                #  'value_type': 'float',
-                #  'values': [0.001, 0.01, 0.1]},
-                # {'name': 'subsample',
-                #  'type': 'choice',
-                #  'value_type': 'float',
-                #  'values': [0.1, 0.5, 1, 2]},
-                # {'name': 'min_samples_split',
-                #  'type': 'choice',
-                #  'value_type': 'float',
-                #  'values': [0.0001, 0.01, 0.1, 0.2, 1]},
-                # {'name': 'min_samples_leaf',
-                #  'type': 'choice',
-                #  'value_type': 'float',
-                #  'values': [0.0001, 0.01, 0.1, 0.5, 1]},
-                # {'name': 'min_impurity_decrease',
-                #  'type': 'choice',
-                #  'value_type': 'float',
-                #  'values': [0.0001, 0.01, 0.1, 0.9, 0]},
-                # {'name': 'alpha',
-                #  'type': 'choice',
-                #  'value_type': 'int',
-                #  'values': [0.2, 0.5, 0.9]},
-                # {'name': 'criterion',
-                #  'type': 'choice',
-                #  'value_type': 'str',
-                #  'values': ['friedman_mse', 'mse']},
-                # {'name': 'loss',
-                #  'type': 'choice',
-                #  'value_type': 'int',
-                #  'values': ['ls', 'lad', 'huber', 'quantile']}
+                #
+                # Block with some additional parameters to search.
+                #
                 ]
 
 
@@ -229,21 +152,9 @@ class ParameterKatsRandomForestRegressor(ParameterBridge):
              'value_type': 'int',
              'values': [10, 50, 100, 300]
              },
-            # {'name': 'criterion',
-            #  'type': 'choice',
-            #  'value_type': 'str',
-            #  'values': ['gini', 'entropy']
-            #  },
-            # {'name': 'min_samples_split',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [0.01, 0.2, 0.3]
-            #  },
-            # {'name': 'min_samples_leaf',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [0.001, 0.01, 0.1, 1]
-            #  }
+             #
+             # Block with some additional parameters to search.
+             #
         ]
 
 
@@ -264,26 +175,9 @@ class ParameterKatsElasticNet(ParameterBridge):
              'value_type': 'float',
              'values': [0, 0.2, 0.5, 0.8, 1]
              },
-            # {'name': 'max_iter',
-            #  'type': 'choice',
-            #  'value_type': 'int',
-            #  'values': [10, 50, 100]
-            #  },
-            # {'name': 'tol',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [exp(-2), exp(-4), exp(-6)]
-            #  },
-            # {'name': 'random_state',
-            #  'type': 'choice',
-            #  'value_type': 'int',
-            #  'values': [42]
-            #  },
-            # {'name': 'selection',
-            #  'type': 'choice',
-            #  'value_type': 'str',
-            #  'values': ['cyclic', 'random']
-            #  }
+             #
+             # Block with some additional parameters to search.
+             #
         ]
 
 
@@ -304,31 +198,9 @@ class ParameterKatsARDRegression(ParameterBridge):
              'value_type': 'float',
              'values': [exp(-3), exp(-2)]
              },
-            # {'name': 'alpha_1',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [exp(-7), exp(-6), exp(-5), exp(-4)]
-            #  },
-            # {'name': 'alpha_2',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [exp(-7), exp(-6), exp(-5), exp(-4)]
-            #  },
-            # {'name': 'lambda_1',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [exp(-7), exp(-6), exp(-5), exp(-4)]
-            #  },
-            # {'name': 'lambda_2',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [exp(-7), exp(-6), exp(-5), exp(-4)]
-            #  },
-            # {'name': 'fit_intercept',
-            #  'type': 'choice',
-            #  'value_type': 'bool',
-            #  'values': [False]
-            #  },
+             #
+             # Block with some additional parameters to search.
+             #
         ]
 
 
@@ -344,36 +216,9 @@ class ParameterKatsCatBoostRegressor(ParameterBridge):
              'value_type': 'str',
              'values': ["Bayesian", "Bernoulli", "MVS"]
              },
-            # {'name': 'depth',
-            #  'type': 'choice',
-            #  'value_type': 'int',
-            #  'values': [2, 5, 10, 20]
-            #  },
-            # {'name': 'iterations',
-            #  'type': 'choice',
-            #  'value_type': 'int',
-            #  'values': [10, 100, 300, 1000]
-            #  },
-            # {'name': 'grow_policy',
-            #  'type': 'choice',
-            #  'value_type': 'str',
-            #  'values': ["SymmetricTree", "Depthwise", "Lossguide"]
-            #  },
-            # {'name': 'loss_function',
-            #  'type': 'choice',
-            #  'value_type': 'str',
-            #  'values': ['Quantile:alpha=0.7', 'Quantile:alpha=0.2', 'RMSE']
-            #  },
-            # {'name': 'learning_rate',
-            #  'type': 'choice',
-            #  'value_type': 'float',
-            #  'values': [0.1, 0.001, 0.0001]
-            #  },
-            # {'name': 'l2_leaf_reg',
-            #  'type': 'choice',
-            #  'value_type': 'int',
-            #  'values': [0, 2, 4, 6]
-            #  },
+             #
+             # Block with some additional parameters to search.
+             #
             {'name': 'verbose',
              'type': 'choice',
              'value_type': 'bool',
