@@ -398,12 +398,10 @@ class PredictorResiduals(SalesPredictor):
             new_entry = fbuilder.create_builder_record(fbuilder.DateIndex, {'feature_name': 'year'})
             new_entry.update(self.columns_builder)
             self.columns_builder = new_entry.copy()
-
-        if any(['month' in name for name in self.columns_builder.keys()]) and (
-                self.columns_builder.get('month') is None):
-            new_entry = fbuilder.create_builder_record(fbuilder.DateIndex, {'feature_name': 'month'})
-            new_entry.update(self.columns_builder)
-            self.columns_builder = new_entry.copy()
+            
+        #
+        # Block with month checking.
+        #
 
 
 class PredictorDeseasonal(SalesPredictor):
@@ -1046,10 +1044,10 @@ class PredictorEnsemble(SalesPredictor):
 
         # grid-search the best scored estimator with it's parameters.
         df_metrics = DataFrame(None, columns=['estimator', 'metric'])
-        for estimator in estimators:
-            tune1, tune2 = RegressorTuner(x_train, y_train, estimator,
-                                          get_param_grid(estimator(), 'Kats')).search_best_parameters()
-            df_metrics.loc[df_metrics.shape[0], ['estimator', 'metric']] = [tune1, tune2]
+        pass
+        #
+        # Block with searching the best estimators.
+        #
 
         idx = df_metrics.loc[:, 'metric'].astype(float).idxmin()
         return df_metrics.loc[idx, 'estimator'], df_metrics.loc[idx, 'metric']
@@ -1102,20 +1100,6 @@ class PredictorEnsemble(SalesPredictor):
         # next step. On the other hand, in production it's impossible, so PredictorEnsemble can
         # makes this regressor too important, cause in the train data it's predictions are too good.
 
-        # x_train = DataFrame(None, columns=forecasters.keys(), index=predict_idx)
-        # for key, forecaster in forecasters.items():
-        #     if isinstance(forecaster, PredictorRegression):
-        #         for idx in predict_idx:
-        #             forecaster.fit(fit_preparation(forecaster,
-        #                                            x.loc[x.index < idx, :], nomenclature_size),
-        #                            search_estimator=False, nomenclature_size=nomenclature_size)
-        #             x_train.at[idx, key] = forecaster.predict(1, nomenclature_size, nomenclature_group)[0]
-        #     else:
-        #         forecaster.fit(fit_preparation(forecaster, x.loc[train_idx, :], nomenclature_size),
-        #                        search_estimator=False, nomenclature_size=nomenclature_size)
-        #         x_train.loc[:, key] = forecaster.predict(len(predict_idx),
-        #                                                  nomenclature_size, nomenclature_group)
-        # return x_train.astype(float)
 
     def _check_nomenclature(self, nomenclature_size: int, nomenclature_group: int = -1):
         """Check incoming specifications of the time series."""
